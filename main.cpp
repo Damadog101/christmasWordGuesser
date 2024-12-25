@@ -9,7 +9,7 @@ using namespace std;
 
 void dummifyString(string& s) {
     for (int i = 0; i < s.length(); i++) {
-        tolower(s.at(i));
+        s.at(i) = tolower(s.at(i));
     }
 }
 
@@ -26,7 +26,8 @@ void chooseWord(string& word, string& codeWord) {
         }
         //cout << "word after done" << word << endl;
     ifs.close();
-
+    dummifyString(word);
+    codeWord = "";
     for (int j = 0; j < word.length(); j++) {
         codeWord += "*";
     }
@@ -44,6 +45,8 @@ int main()  {
 
     while (continuePlaying) {
         chooseWord(goalWord, hiddenWord);
+        hasWonGame = false;
+
         //cout << goalWord << " " << hiddenWord << endl;
         while (!hasWonGame) {
             cout << "Guess the Christmas Themed Word: " << hiddenWord << endl;
@@ -52,23 +55,27 @@ int main()  {
             if (currentGuess == goalWord) {
                 hasWonGame = true;
                 cout << "You Win! The Word Was " << goalWord << endl;
-                cout << "Would You Like To Play Again? (Type 1 For Yes, Type 0 For No)";
+                cout << "Would You Like To Play Again? (Type 1 For Yes, Type 0 For No)" << endl;
                 cin >> playAgain;
                 if (playAgain == "0") {
-                    hasWonGame = false;
+                    continuePlaying = false;
                 } else if (playAgain == "1") {
-                    hasWonGame = true;
+                    continuePlaying = true;
                 } else {
                     cout << "Invalid Input. Ending Game." << endl;
+                    continuePlaying = false;
                 }
             } else {
-                for (int i = 0; i < goalWord.length(); i++) {
-                    if (currentGuess.at(i) == goalWord.at(i)) {
-                        hiddenWord.at(i) = goalWord.at(i);
+                if ((goalWord.length() == currentGuess.length())) {
+                    for (int i = 0; i < goalWord.length(); i++) {
+                       if (currentGuess.at(i) == goalWord.at(i)) {
+                          hiddenWord.at(i) = goalWord.at(i);
+                      }
+
                     }
-
+                } else {
+                    cout << "Your Guess Is Not The Same Length As The Answer!" << endl;
                 }
-
             }
         }
 

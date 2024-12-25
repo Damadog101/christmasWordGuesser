@@ -31,7 +31,6 @@ Festival
 Fir
 Frosty
 Fruitcake
-Giftbox
 Gifts
 Goodwill
 Greetings
@@ -48,7 +47,7 @@ Merry
 Miracle
 Mistletoe
 Noel
-North Pole
+North
 Pageant
 Parades
 Party
